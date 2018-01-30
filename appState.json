@@ -53,7 +53,7 @@
           "resourceName": "path",
           "resourcePath": "/path",
           "restMethod": "GET",
-          "proxyIntegration": true,
+          "proxyIntegration": false,
           "enableCORS": true,
           "stageMode": 0,
           "stageName": "stage"
@@ -93,6 +93,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517291244079
+    "lastSave": 1517292349980
   }
 }
