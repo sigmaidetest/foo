@@ -23,9 +23,16 @@
         "isRemovable": true,
         "filePath": "foo/lambda.js",
         "code": "let AWS = require('aws-sdk');\n\nexports.handler = function(event, context, callback) {\n\tcallback(null,'Successfully executed');\n}",
-        "resources": [],
-        "triggers": [],
-        "version": 4
+        "resources": [
+          "apigusEast1apipathput"
+        ],
+        "triggers": [
+          {
+            "resourceName": "apigusEast1apipathput",
+            "config": {}
+          }
+        ],
+        "version": 1
       }
     },
     "rootNode": "cb1fcce1-f883-44cc-8e9e-a86da6676ff6",
@@ -33,7 +40,44 @@
       "4b64c943-f97f-4b87-adfa-bc218ad71b44"
     ],
     "currentFileId": "4b64c943-f97f-4b87-adfa-bc218ad71b44",
-    "resources": {},
+    "resources": {
+      "apigusEast1apipathput": {
+        "name": "apigusEast1apipathput",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 1,
+          "apiName": "api",
+          "apiId": "1xpfbf02qe",
+          "endpointType": "EDGE",
+          "rootResourceId": "4l39dbzqp4",
+          "existingResources": {
+            "/": "4l39dbzqp4",
+            "/path": "75emi5"
+          },
+          "resourceMode": 1,
+          "resourcePath": "/path",
+          "resourceName": "path",
+          "resourceId": "75emi5",
+          "restMethod": "PUT",
+          "proxyIntegration": true,
+          "enableCORS": true,
+          "stageMode": 1,
+          "stageName": "stage",
+          "stageDeploymentId": "s6yqed"
+        },
+        "globallyEditable": true,
+        "usage": {
+          "4b64c943-f97f-4b87-adfa-bc218ad71b44": {
+            "operations": {},
+            "occurrence": 1,
+            "triggers": [
+              {}
+            ]
+          }
+        }
+      }
+    },
     "packageJSON": {
       "dependencies": {
         "aws-sdk": {
@@ -57,6 +101,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517290399413
+    "lastSave": 1517290924281
   }
 }
