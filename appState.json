@@ -24,11 +24,11 @@
         "filePath": "foo/lambda.js",
         "code": "let AWS = require('aws-sdk');\n\nexports.handler = function(event, context, callback) {\n\tcallback(null,'Successfully executed');\n}",
         "resources": [
-          "apigusEast1apipathput"
+          "apigusEast1apipathget"
         ],
         "triggers": [
           {
-            "resourceName": "apigusEast1apipathput",
+            "resourceName": "apigusEast1apipathget",
             "config": {}
           }
         ],
@@ -41,30 +41,22 @@
     ],
     "currentFileId": "4b64c943-f97f-4b87-adfa-bc218ad71b44",
     "resources": {
-      "apigusEast1apipathput": {
-        "name": "apigusEast1apipathput",
+      "apigusEast1apipathget": {
+        "name": "apigusEast1apipathget",
         "type": "API_GATEWAY",
         "config": {
           "selectedRegion": "us-east-1",
-          "apiMode": 1,
+          "apiMode": 0,
           "apiName": "api",
-          "apiId": "1xpfbf02qe",
           "endpointType": "EDGE",
-          "rootResourceId": "4l39dbzqp4",
-          "existingResources": {
-            "/": "4l39dbzqp4",
-            "/path": "75emi5"
-          },
-          "resourceMode": 1,
-          "resourcePath": "/path",
+          "resourceMode": 0,
           "resourceName": "path",
-          "resourceId": "75emi5",
-          "restMethod": "PUT",
+          "resourcePath": "/path",
+          "restMethod": "GET",
           "proxyIntegration": true,
           "enableCORS": true,
-          "stageMode": 1,
-          "stageName": "stage",
-          "stageDeploymentId": "s6yqed"
+          "stageMode": 0,
+          "stageName": "stage"
         },
         "globallyEditable": true,
         "usage": {
@@ -101,6 +93,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517290924281
+    "lastSave": 1517291244079
   }
 }
