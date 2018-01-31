@@ -22,17 +22,17 @@
         "children": [],
         "isRemovable": true,
         "filePath": "foo/lambda.js",
-        "code": "let AWS = require('aws-sdk');\n\nexports.handler = function(event, context, callback) {\n\tcallback(null,'Successfully executed');\n}",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\tddb.put({\n\t\tTableName: 'fad',\n\t\tItem: {\n\t\t\t'k': 'b'\n\t\t}\n\t}, function (err, data) {\n\t\tif (err) {\n\t\t\t//handle error\n\t\t} else {\n\t\t\t//your logic goes here\n\t\t}\n\t});\n\tcallback(null, 'Successfully executed');\n}",
         "resources": [
-          "apigusEast1apipathget"
+          "apigusEast1apipathput"
         ],
         "triggers": [
           {
-            "resourceName": "apigusEast1apipathget",
+            "resourceName": "apigusEast1apipathput",
             "config": {}
           }
         ],
-        "version": 1
+        "version": 7
       }
     },
     "rootNode": "cb1fcce1-f883-44cc-8e9e-a86da6676ff6",
@@ -59,6 +59,26 @@
           "stageName": "stage"
         },
         "globallyEditable": true,
+        "usage": {}
+      },
+      "apigusEast1apipathput": {
+        "name": "apigusEast1apipathput",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 0,
+          "apiName": "api",
+          "endpointType": "EDGE",
+          "resourceMode": 0,
+          "resourceName": "path",
+          "resourcePath": "/path",
+          "restMethod": "PUT",
+          "proxyIntegration": false,
+          "enableCORS": true,
+          "stageMode": 0,
+          "stageName": "stage"
+        },
+        "globallyEditable": true,
         "usage": {
           "4b64c943-f97f-4b87-adfa-bc218ad71b44": {
             "operations": {},
@@ -66,6 +86,85 @@
             "triggers": [
               {}
             ]
+          }
+        }
+      },
+      "kinesisone": {
+        "name": "kinesisone",
+        "type": "Kinesis",
+        "config": {
+          "mode": 0,
+          "StreamName": "one",
+          "shards": 1,
+          "region": "us-east-1",
+          "triggerParams": {
+            "StartingPosition": "TRIM_HORIZON",
+            "BatchSize": 100
+          }
+        },
+        "globallyEditable": true,
+        "usage": {}
+      },
+      "kinesistwo": {
+        "name": "kinesistwo",
+        "type": "Kinesis",
+        "config": {
+          "mode": 0,
+          "StreamName": "two",
+          "shards": 1,
+          "region": "us-east-1",
+          "triggerParams": {
+            "StartingPosition": "TRIM_HORIZON",
+            "BatchSize": 100
+          }
+        },
+        "globallyEditable": true,
+        "usage": {}
+      },
+      "ddbfad": {
+        "name": "ddbfad",
+        "type": "DynamoDB",
+        "config": {
+          "mode": 0,
+          "operation": "put",
+          "table": {
+            "arn": "",
+            "name": "fad",
+            "partitionKey": "fa",
+            "partitionKeyType": "S",
+            "hasSortKey": false,
+            "sortKey": "",
+            "sortKeyType": "S",
+            "mode": 0
+          },
+          "isGlobalEditMode": false,
+          "parameters": {
+            "TableName": "fad",
+            "Item": {
+              "k": "b"
+            }
+          },
+          "validator": {
+            "validatableFields": {},
+            "validity": true
+          },
+          "valid": true
+        },
+        "globallyEditable": true,
+        "usage": {
+          "4b64c943-f97f-4b87-adfa-bc218ad71b44": {
+            "operations": {
+              "put": [
+                {
+                  "TableName": "fad",
+                  "Item": {
+                    "k": "b"
+                  }
+                }
+              ]
+            },
+            "occurrence": 1,
+            "triggers": []
           }
         }
       }
@@ -85,7 +184,8 @@
       }
     },
     "lambdaId": "4b64c943-f97f-4b87-adfa-bc218ad71b44",
-    "changeExistingProject": false
+    "changeExistingProject": false,
+    "additionalFiles": []
   },
   "PROJECT_META": {
     "projectName": "foo",
@@ -93,6 +193,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517296523623
+    "lastSave": 1517360599652
   }
 }
