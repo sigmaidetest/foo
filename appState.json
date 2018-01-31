@@ -25,15 +25,23 @@
         "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\tddb.put({\n\t\tTableName: 'fad',\n\t\tItem: {\n\t\t\t'k': 'ba'\n\t\t}\n\t}, function (err, data) {\n\t\tif (err) {\n\t\t\t//handle error\n\t\t} else {\n\t\t\t//your logic goes here\n\t\t}\n\t});\n\tcallback(null, 'Successfully executed');\n}",
         "resources": [
           "apigusEast1apipathput",
-          "ddbfad"
+          "ddbfad",
+          "kinesisfoo"
         ],
         "triggers": [
           {
             "resourceName": "apigusEast1apipathput",
             "config": {}
+          },
+          {
+            "resourceName": "kinesisfoo",
+            "config": {
+              "StartingPosition": "TRIM_HORIZON",
+              "BatchSize": 100
+            }
           }
         ],
-        "version": 9
+        "version": 1
       }
     },
     "rootNode": "cb1fcce1-f883-44cc-8e9e-a86da6676ff6",
@@ -152,20 +160,32 @@
           "valid": true
         },
         "globallyEditable": true,
+        "usage": {}
+      },
+      "kinesisfoo": {
+        "name": "kinesisfoo",
+        "type": "Kinesis",
+        "config": {
+          "mode": 1,
+          "StreamName": "foo",
+          "shards": 1,
+          "region": "us-east-1",
+          "triggerParams": {
+            "StartingPosition": "TRIM_HORIZON",
+            "BatchSize": 100
+          }
+        },
+        "globallyEditable": true,
         "usage": {
           "4b64c943-f97f-4b87-adfa-bc218ad71b44": {
-            "operations": {
-              "put": [
-                {
-                  "TableName": "fad",
-                  "Item": {
-                    "k": "ba"
-                  }
-                }
-              ]
-            },
+            "operations": {},
             "occurrence": 1,
-            "triggers": []
+            "triggers": [
+              {
+                "StartingPosition": "TRIM_HORIZON",
+                "BatchSize": 100
+              }
+            ]
           }
         }
       }
@@ -185,7 +205,7 @@
       }
     },
     "lambdaId": "4b64c943-f97f-4b87-adfa-bc218ad71b44",
-    "changeExistingProject": false,
+    "changeExistingProject": true,
     "additionalFiles": []
   },
   "PROJECT_META": {
@@ -194,6 +214,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517360910254
+    "lastSave": 1517362446729
   }
 }
