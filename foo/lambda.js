@@ -9,9 +9,7 @@ exports.handler = function (event, context, callback) {
 		}
 	}, function (err, data) {
 		if (err) {
-			//handle error
 		} else {
-			//your logic goes here
 		}
 	});
 	callback(null, 'Successfully executed');

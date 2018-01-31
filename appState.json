@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "foo/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\tddb.put({\n\t\tTableName: 'fad',\n\t\tItem: {\n\t\t\t'k': 'ba'\n\t\t}\n\t}, function (err, data) {\n\t\tif (err) {\n\t\t\t//handle error\n\t\t} else {\n\t\t\t//your logic goes here\n\t\t}\n\t});\n\tcallback(null, 'Successfully executed');\n}",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\tddb.put({\n\t\tTableName: 'fad',\n\t\tItem: {\n\t\t\t'k': 'ba'\n\t\t}\n\t}, function (err, data) {\n\t\tif (err) {\n\t\t} else {\n\t\t}\n\t});\n\tcallback(null, 'Successfully executed');\n}",
         "resources": [
           "apigusEast1apipathput",
           "ddbfad",
@@ -41,7 +41,7 @@
             }
           }
         ],
-        "version": 1
+        "version": 4
       }
     },
     "rootNode": "cb1fcce1-f883-44cc-8e9e-a86da6676ff6",
@@ -160,7 +160,22 @@
           "valid": true
         },
         "globallyEditable": true,
-        "usage": {}
+        "usage": {
+          "4b64c943-f97f-4b87-adfa-bc218ad71b44": {
+            "operations": {
+              "put": [
+                {
+                  "TableName": "fad",
+                  "Item": {
+                    "k": "ba"
+                  }
+                }
+              ]
+            },
+            "occurrence": 1,
+            "triggers": []
+          }
+        }
       },
       "kinesisfoo": {
         "name": "kinesisfoo",
@@ -214,6 +229,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517362446729
+    "lastSave": 1517362957581
   }
 }
