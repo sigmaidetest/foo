@@ -5,7 +5,7 @@ exports.handler = function (event, context, callback) {
 	ddb.put({
 		TableName: 'fad',
 		Item: {
-			'k': 'b'
+			'k': 'ba'
 		}
 	}, function (err, data) {
 		if (err) {

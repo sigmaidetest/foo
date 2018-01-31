@@ -22,9 +22,10 @@
         "children": [],
         "isRemovable": true,
         "filePath": "foo/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\tddb.put({\n\t\tTableName: 'fad',\n\t\tItem: {\n\t\t\t'k': 'b'\n\t\t}\n\t}, function (err, data) {\n\t\tif (err) {\n\t\t\t//handle error\n\t\t} else {\n\t\t\t//your logic goes here\n\t\t}\n\t});\n\tcallback(null, 'Successfully executed');\n}",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\tddb.put({\n\t\tTableName: 'fad',\n\t\tItem: {\n\t\t\t'k': 'ba'\n\t\t}\n\t}, function (err, data) {\n\t\tif (err) {\n\t\t\t//handle error\n\t\t} else {\n\t\t\t//your logic goes here\n\t\t}\n\t});\n\tcallback(null, 'Successfully executed');\n}",
         "resources": [
-          "apigusEast1apipathput"
+          "apigusEast1apipathput",
+          "ddbfad"
         ],
         "triggers": [
           {
@@ -32,7 +33,7 @@
             "config": {}
           }
         ],
-        "version": 7
+        "version": 9
       }
     },
     "rootNode": "cb1fcce1-f883-44cc-8e9e-a86da6676ff6",
@@ -141,7 +142,7 @@
           "parameters": {
             "TableName": "fad",
             "Item": {
-              "k": "b"
+              "k": "ba"
             }
           },
           "validator": {
@@ -158,7 +159,7 @@
                 {
                   "TableName": "fad",
                   "Item": {
-                    "k": "b"
+                    "k": "ba"
                   }
                 }
               ]
@@ -193,6 +194,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517360599652
+    "lastSave": 1517360910254
   }
 }
