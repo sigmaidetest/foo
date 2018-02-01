@@ -23,8 +23,15 @@
         "isRemovable": true,
         "filePath": "foo/lambda.js",
         "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\tcallback(null, 'Successfully executed');\n}",
-        "resources": [],
-        "triggers": [],
+        "resources": [
+          "apigusEast1apipathany"
+        ],
+        "triggers": [
+          {
+            "resourceName": "apigusEast1apipathany",
+            "config": {}
+          }
+        ],
         "version": 1
       }
     },
@@ -33,7 +40,36 @@
       "4b64c943-f97f-4b87-adfa-bc218ad71b44"
     ],
     "currentFileId": "4b64c943-f97f-4b87-adfa-bc218ad71b44",
-    "resources": {},
+    "resources": {
+      "apigusEast1apipathany": {
+        "name": "apigusEast1apipathany",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 0,
+          "apiName": "api",
+          "endpointType": "EDGE",
+          "resourceMode": 0,
+          "resourceName": "path",
+          "resourcePath": "/path",
+          "restMethod": "ANY",
+          "proxyIntegration": false,
+          "enableCORS": false,
+          "stageMode": 0,
+          "stageName": "stage"
+        },
+        "globallyEditable": true,
+        "usage": {
+          "4b64c943-f97f-4b87-adfa-bc218ad71b44": {
+            "operations": {},
+            "occurrence": 1,
+            "triggers": [
+              {}
+            ]
+          }
+        }
+      }
+    },
     "packageJSON": {
       "dependencies": {
         "aws-sdk": {
@@ -58,6 +94,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517480193195
+    "lastSave": 1517480334648
   }
 }
