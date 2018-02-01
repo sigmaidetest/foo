@@ -24,15 +24,16 @@
         "filePath": "foo/lambda.js",
         "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\tcallback(null, 'Successfully executed');\n}",
         "resources": [
-          "apigusEast1apipathany"
+          "apigusEast1api1any",
+          "apigusEast1api2any"
         ],
         "triggers": [
           {
-            "resourceName": "apigusEast1sigpath2post",
+            "resourceName": "apigusEast1api1any",
             "config": {}
           },
           {
-            "resourceName": "apigusEast1apipathany",
+            "resourceName": "apigusEast1api2any",
             "config": {}
           }
         ],
@@ -45,8 +46,37 @@
     ],
     "currentFileId": "4b64c943-f97f-4b87-adfa-bc218ad71b44",
     "resources": {
-      "apigusEast1sigpath2post": {
-        "name": "apigusEast1sigpath2post",
+      "apigusEast1sigsigput": {
+        "name": "apigusEast1sigsigput",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 1,
+          "apiName": "sig",
+          "apiId": "r22952wrn5",
+          "endpointType": "EDGE",
+          "rootResourceId": "f8i0oeybrj",
+          "existingResources": {
+            "/": "f8i0oeybrj",
+            "/sig": "fiq0wf",
+            "/path": "l4gfdn"
+          },
+          "resourceMode": 1,
+          "resourcePath": "/sig",
+          "resourceName": "sig",
+          "resourceId": "fiq0wf",
+          "restMethod": "PUT",
+          "proxyIntegration": true,
+          "enableCORS": false,
+          "stageMode": 1,
+          "stageName": "test",
+          "stageDeploymentId": "b4qmfa"
+        },
+        "globallyEditable": true,
+        "usage": {}
+      },
+      "apigusEast1sigsig2get": {
+        "name": "apigusEast1sigsig2get",
         "type": "API_GATEWAY",
         "config": {
           "selectedRegion": "us-east-1",
@@ -61,14 +91,34 @@
             "/path": "l4gfdn"
           },
           "resourceMode": 0,
-          "resourceName": "path2",
-          "resourcePath": "/path2",
-          "restMethod": "POST",
+          "resourceName": "sig2",
+          "resourcePath": "/sig2",
+          "restMethod": "GET",
           "proxyIntegration": true,
           "enableCORS": false,
           "stageMode": 1,
           "stageName": "test",
           "stageDeploymentId": "b4qmfa"
+        },
+        "globallyEditable": true,
+        "usage": {}
+      },
+      "apigusEast1api1any": {
+        "name": "apigusEast1api1any",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 0,
+          "apiName": "api",
+          "endpointType": "EDGE",
+          "resourceMode": 0,
+          "resourceName": "1",
+          "resourcePath": "/1",
+          "restMethod": "ANY",
+          "proxyIntegration": false,
+          "enableCORS": false,
+          "stageMode": 0,
+          "stageName": "1"
         },
         "globallyEditable": true,
         "usage": {
@@ -81,8 +131,8 @@
           }
         }
       },
-      "apigusEast1apipathany": {
-        "name": "apigusEast1apipathany",
+      "apigusEast1api2any": {
+        "name": "apigusEast1api2any",
         "type": "API_GATEWAY",
         "config": {
           "selectedRegion": "us-east-1",
@@ -90,13 +140,13 @@
           "apiName": "api",
           "endpointType": "EDGE",
           "resourceMode": 0,
-          "resourceName": "path",
-          "resourcePath": "/path",
+          "resourceName": "2",
+          "resourcePath": "/2",
           "restMethod": "ANY",
           "proxyIntegration": false,
           "enableCORS": false,
           "stageMode": 0,
-          "stageName": "test"
+          "stageName": "1"
         },
         "globallyEditable": true,
         "usage": {
@@ -134,6 +184,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517475210247
+    "lastSave": 1517479711351
   }
 }
