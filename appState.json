@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "foo/lambda.js",
-        "code": "let AWS = require('aws-sdk');\n\nexports.handler = function (event, context, callback) {\n\tcallback(null, 'Successfully executed');\n}",
+        "code": "let AWS = require('aws-sdk');\nexports.handler = function (event, context, callback) {\n\tcallback(null, 'Successfully executed');\n}",
         "resources": [
           "apigusEast1apipathget"
         ],
@@ -32,7 +32,7 @@
             "config": {}
           }
         ],
-        "version": 2
+        "version": 3
       }
     },
     "rootNode": "cb1fcce1-f883-44cc-8e9e-a86da6676ff6",
@@ -122,6 +122,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517480612326
+    "lastSave": 1517480647328
   }
 }
