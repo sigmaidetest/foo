@@ -24,11 +24,15 @@
         "filePath": "foo/lambda.js",
         "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\tcallback(null, 'Successfully executed');\n}",
         "resources": [
-          "apigusEast1sigundefinedoptions"
+          "apigusEast1apipathany"
         ],
         "triggers": [
           {
-            "resourceName": "apigusEast1sigundefinedoptions",
+            "resourceName": "apigusEast1sigpath2post",
+            "config": {}
+          },
+          {
+            "resourceName": "apigusEast1apipathany",
             "config": {}
           }
         ],
@@ -41,36 +45,8 @@
     ],
     "currentFileId": "4b64c943-f97f-4b87-adfa-bc218ad71b44",
     "resources": {
-      "apigusEast1apipathput": {
-        "name": "apigusEast1apipathput",
-        "type": "API_GATEWAY",
-        "config": {
-          "selectedRegion": "us-east-1",
-          "apiMode": 1,
-          "apiName": "api",
-          "apiId": "hna2kvgf8a",
-          "endpointType": "REGIONAL",
-          "rootResourceId": "taeom5a6sl",
-          "existingResources": {
-            "/path": "gd0u20",
-            "/": "taeom5a6sl"
-          },
-          "resourceMode": 1,
-          "resourcePath": "/path",
-          "resourceName": "path",
-          "resourceId": "gd0u20",
-          "restMethod": "PUT",
-          "proxyIntegration": false,
-          "enableCORS": false,
-          "stageMode": 1,
-          "stageName": "test",
-          "stageDeploymentId": "yc4ctt"
-        },
-        "globallyEditable": true,
-        "usage": {}
-      },
-      "apigusEast1sigundefinedoptions": {
-        "name": "apigusEast1sigundefinedoptions",
+      "apigusEast1sigpath2post": {
+        "name": "apigusEast1sigpath2post",
         "type": "API_GATEWAY",
         "config": {
           "selectedRegion": "us-east-1",
@@ -81,18 +57,46 @@
           "rootResourceId": "f8i0oeybrj",
           "existingResources": {
             "/": "f8i0oeybrj",
-            "/sig": "fiq0wf"
+            "/sig": "fiq0wf",
+            "/path": "l4gfdn"
           },
-          "resourceMode": 1,
-          "resourcePath": "/",
-          "resourceName": "",
-          "resourceId": "f8i0oeybrj",
-          "restMethod": "OPTIONS",
-          "proxyIntegration": false,
+          "resourceMode": 0,
+          "resourceName": "path2",
+          "resourcePath": "/path2",
+          "restMethod": "POST",
+          "proxyIntegration": true,
           "enableCORS": false,
           "stageMode": 1,
           "stageName": "test",
-          "stageDeploymentId": "7jb1k4"
+          "stageDeploymentId": "b4qmfa"
+        },
+        "globallyEditable": true,
+        "usage": {
+          "4b64c943-f97f-4b87-adfa-bc218ad71b44": {
+            "operations": {},
+            "occurrence": 1,
+            "triggers": [
+              {}
+            ]
+          }
+        }
+      },
+      "apigusEast1apipathany": {
+        "name": "apigusEast1apipathany",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 0,
+          "apiName": "api",
+          "endpointType": "EDGE",
+          "resourceMode": 0,
+          "resourceName": "path",
+          "resourcePath": "/path",
+          "restMethod": "ANY",
+          "proxyIntegration": false,
+          "enableCORS": false,
+          "stageMode": 0,
+          "stageName": "test"
         },
         "globallyEditable": true,
         "usage": {
@@ -130,6 +134,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517469274550
+    "lastSave": 1517475210247
   }
 }
