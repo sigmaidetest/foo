@@ -23,16 +23,9 @@
         "isRemovable": true,
         "filePath": "foo/lambda.js",
         "code": "let AWS = require('aws-sdk');\nexports.handler = function (event, context, callback) {\n\tcallback(null, 'Successfully executed');\n}",
-        "resources": [
-          "apigusEast1apipathget"
-        ],
-        "triggers": [
-          {
-            "resourceName": "apigusEast1apipathget",
-            "config": {}
-          }
-        ],
-        "version": 3
+        "resources": [],
+        "triggers": [],
+        "version": 1
       }
     },
     "rootNode": "cb1fcce1-f883-44cc-8e9e-a86da6676ff6",
@@ -40,64 +33,7 @@
       "4b64c943-f97f-4b87-adfa-bc218ad71b44"
     ],
     "currentFileId": "4b64c943-f97f-4b87-adfa-bc218ad71b44",
-    "resources": {
-      "apigusEast1apipathany": {
-        "name": "apigusEast1apipathany",
-        "type": "API_GATEWAY",
-        "config": {
-          "selectedRegion": "us-east-1",
-          "apiMode": 0,
-          "apiName": "api",
-          "endpointType": "EDGE",
-          "resourceMode": 0,
-          "resourceName": "path",
-          "resourcePath": "/path",
-          "restMethod": "ANY",
-          "proxyIntegration": false,
-          "enableCORS": false,
-          "stageMode": 0,
-          "stageName": "stage"
-        },
-        "globallyEditable": true,
-        "usage": {}
-      },
-      "apigusEast1apipathget": {
-        "name": "apigusEast1apipathget",
-        "type": "API_GATEWAY",
-        "config": {
-          "selectedRegion": "us-east-1",
-          "apiMode": 1,
-          "apiName": "api",
-          "apiId": "3jbhlog9jh",
-          "endpointType": "EDGE",
-          "rootResourceId": "0i3wu4wqp5",
-          "existingResources": {
-            "/": "0i3wu4wqp5",
-            "/path": "2038ln"
-          },
-          "resourceMode": 1,
-          "resourcePath": "/path",
-          "resourceName": "path",
-          "resourceId": "2038ln",
-          "restMethod": "GET",
-          "proxyIntegration": false,
-          "enableCORS": false,
-          "stageMode": 1,
-          "stageName": "stage",
-          "stageDeploymentId": "ddy73s"
-        },
-        "globallyEditable": true,
-        "usage": {
-          "4b64c943-f97f-4b87-adfa-bc218ad71b44": {
-            "operations": {},
-            "occurrence": 1,
-            "triggers": [
-              {}
-            ]
-          }
-        }
-      }
-    },
+    "resources": {},
     "packageJSON": {
       "dependencies": {
         "aws-sdk": {
@@ -122,6 +58,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517480647328
+    "lastSave": 1517481782282
   }
 }
