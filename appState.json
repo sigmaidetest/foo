@@ -22,26 +22,10 @@
         "children": [],
         "isRemovable": true,
         "filePath": "foo/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\tddb.put({\n\t\tTableName: 'fad',\n\t\tItem: {\n\t\t\t'k': 'ba'\n\t\t}\n\t}, function (err, data) {\n\t\tif (err) {\n\t\t} else {\n\t\t}\n\t});\n\tcallback(null, 'Successfully executed');\n}",
-        "resources": [
-          "apigusEast1apipathput",
-          "ddbfad",
-          "kinesisfoo"
-        ],
-        "triggers": [
-          {
-            "resourceName": "apigusEast1apipathput",
-            "config": {}
-          },
-          {
-            "resourceName": "kinesisfoo",
-            "config": {
-              "StartingPosition": "TRIM_HORIZON",
-              "BatchSize": 100
-            }
-          }
-        ],
-        "version": 4
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\tcallback(null, 'Successfully executed');\n}",
+        "resources": [],
+        "triggers": [],
+        "version": 1
       }
     },
     "rootNode": "cb1fcce1-f883-44cc-8e9e-a86da6676ff6",
@@ -50,86 +34,6 @@
     ],
     "currentFileId": "4b64c943-f97f-4b87-adfa-bc218ad71b44",
     "resources": {
-      "apigusEast1apipathget": {
-        "name": "apigusEast1apipathget",
-        "type": "API_GATEWAY",
-        "config": {
-          "selectedRegion": "us-east-1",
-          "apiMode": 0,
-          "apiName": "api",
-          "endpointType": "EDGE",
-          "resourceMode": 0,
-          "resourceName": "path",
-          "resourcePath": "/path",
-          "restMethod": "GET",
-          "proxyIntegration": false,
-          "enableCORS": true,
-          "stageMode": 0,
-          "stageName": "stage"
-        },
-        "globallyEditable": true,
-        "usage": {}
-      },
-      "apigusEast1apipathput": {
-        "name": "apigusEast1apipathput",
-        "type": "API_GATEWAY",
-        "config": {
-          "selectedRegion": "us-east-1",
-          "apiMode": 0,
-          "apiName": "api",
-          "endpointType": "EDGE",
-          "resourceMode": 0,
-          "resourceName": "path",
-          "resourcePath": "/path",
-          "restMethod": "PUT",
-          "proxyIntegration": false,
-          "enableCORS": true,
-          "stageMode": 0,
-          "stageName": "stage"
-        },
-        "globallyEditable": true,
-        "usage": {
-          "4b64c943-f97f-4b87-adfa-bc218ad71b44": {
-            "operations": {},
-            "occurrence": 1,
-            "triggers": [
-              {}
-            ]
-          }
-        }
-      },
-      "kinesisone": {
-        "name": "kinesisone",
-        "type": "Kinesis",
-        "config": {
-          "mode": 0,
-          "StreamName": "one",
-          "shards": 1,
-          "region": "us-east-1",
-          "triggerParams": {
-            "StartingPosition": "TRIM_HORIZON",
-            "BatchSize": 100
-          }
-        },
-        "globallyEditable": true,
-        "usage": {}
-      },
-      "kinesistwo": {
-        "name": "kinesistwo",
-        "type": "Kinesis",
-        "config": {
-          "mode": 0,
-          "StreamName": "two",
-          "shards": 1,
-          "region": "us-east-1",
-          "triggerParams": {
-            "StartingPosition": "TRIM_HORIZON",
-            "BatchSize": 100
-          }
-        },
-        "globallyEditable": true,
-        "usage": {}
-      },
       "ddbfad": {
         "name": "ddbfad",
         "type": "DynamoDB",
@@ -160,49 +64,7 @@
           "valid": true
         },
         "globallyEditable": true,
-        "usage": {
-          "4b64c943-f97f-4b87-adfa-bc218ad71b44": {
-            "operations": {
-              "put": [
-                {
-                  "TableName": "fad",
-                  "Item": {
-                    "k": "ba"
-                  }
-                }
-              ]
-            },
-            "occurrence": 1,
-            "triggers": []
-          }
-        }
-      },
-      "kinesisfoo": {
-        "name": "kinesisfoo",
-        "type": "Kinesis",
-        "config": {
-          "mode": 1,
-          "StreamName": "foo",
-          "shards": 1,
-          "region": "us-east-1",
-          "triggerParams": {
-            "StartingPosition": "TRIM_HORIZON",
-            "BatchSize": 100
-          }
-        },
-        "globallyEditable": true,
-        "usage": {
-          "4b64c943-f97f-4b87-adfa-bc218ad71b44": {
-            "operations": {},
-            "occurrence": 1,
-            "triggers": [
-              {
-                "StartingPosition": "TRIM_HORIZON",
-                "BatchSize": 100
-              }
-            ]
-          }
-        }
+        "usage": {}
       }
     },
     "packageJSON": {
@@ -229,6 +91,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517362957581
+    "lastSave": 1517462720983
   }
 }
