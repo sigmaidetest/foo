@@ -33,40 +33,7 @@
       "4b64c943-f97f-4b87-adfa-bc218ad71b44"
     ],
     "currentFileId": "4b64c943-f97f-4b87-adfa-bc218ad71b44",
-    "resources": {
-      "ddbfad": {
-        "name": "ddbfad",
-        "type": "DynamoDB",
-        "config": {
-          "mode": 0,
-          "operation": "put",
-          "table": {
-            "arn": "",
-            "name": "fad",
-            "partitionKey": "fa",
-            "partitionKeyType": "S",
-            "hasSortKey": false,
-            "sortKey": "",
-            "sortKeyType": "S",
-            "mode": 0
-          },
-          "isGlobalEditMode": false,
-          "parameters": {
-            "TableName": "fad",
-            "Item": {
-              "k": "ba"
-            }
-          },
-          "validator": {
-            "validatableFields": {},
-            "validity": true
-          },
-          "valid": true
-        },
-        "globallyEditable": true,
-        "usage": {}
-      }
-    },
+    "resources": {},
     "packageJSON": {
       "dependencies": {
         "aws-sdk": {
@@ -91,6 +58,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517462720983
+    "lastSave": 1517463484381
   }
 }
