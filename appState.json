@@ -24,11 +24,11 @@
         "filePath": "foo/lambda.js",
         "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\tcallback(null, 'Successfully executed');\n}",
         "resources": [
-          "apigusEast1apipathput"
+          "apigusEast1sigundefinedoptions"
         ],
         "triggers": [
           {
-            "resourceName": "apigusEast1apipathput",
+            "resourceName": "apigusEast1sigundefinedoptions",
             "config": {}
           }
         ],
@@ -67,6 +67,34 @@
           "stageDeploymentId": "yc4ctt"
         },
         "globallyEditable": true,
+        "usage": {}
+      },
+      "apigusEast1sigundefinedoptions": {
+        "name": "apigusEast1sigundefinedoptions",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 1,
+          "apiName": "sig",
+          "apiId": "r22952wrn5",
+          "endpointType": "EDGE",
+          "rootResourceId": "f8i0oeybrj",
+          "existingResources": {
+            "/": "f8i0oeybrj",
+            "/sig": "fiq0wf"
+          },
+          "resourceMode": 1,
+          "resourcePath": "/",
+          "resourceName": "",
+          "resourceId": "f8i0oeybrj",
+          "restMethod": "OPTIONS",
+          "proxyIntegration": false,
+          "enableCORS": false,
+          "stageMode": 1,
+          "stageName": "test",
+          "stageDeploymentId": "7jb1k4"
+        },
+        "globallyEditable": true,
         "usage": {
           "4b64c943-f97f-4b87-adfa-bc218ad71b44": {
             "operations": {},
@@ -102,6 +130,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517466646987
+    "lastSave": 1517469274550
   }
 }
