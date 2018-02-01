@@ -24,11 +24,11 @@
         "filePath": "foo/lambda.js",
         "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\tcallback(null, 'Successfully executed');\n}",
         "resources": [
-          "apigusEast1apipathget"
+          "apigusEast1apipathput"
         ],
         "triggers": [
           {
-            "resourceName": "apigusEast1apipathget",
+            "resourceName": "apigusEast1apipathput",
             "config": {}
           }
         ],
@@ -41,22 +41,30 @@
     ],
     "currentFileId": "4b64c943-f97f-4b87-adfa-bc218ad71b44",
     "resources": {
-      "apigusEast1apipathget": {
-        "name": "apigusEast1apipathget",
+      "apigusEast1apipathput": {
+        "name": "apigusEast1apipathput",
         "type": "API_GATEWAY",
         "config": {
           "selectedRegion": "us-east-1",
-          "apiMode": 0,
+          "apiMode": 1,
           "apiName": "api",
+          "apiId": "hna2kvgf8a",
           "endpointType": "REGIONAL",
-          "resourceMode": 0,
-          "resourceName": "path",
+          "rootResourceId": "taeom5a6sl",
+          "existingResources": {
+            "/path": "gd0u20",
+            "/": "taeom5a6sl"
+          },
+          "resourceMode": 1,
           "resourcePath": "/path",
-          "restMethod": "GET",
-          "proxyIntegration": true,
+          "resourceName": "path",
+          "resourceId": "gd0u20",
+          "restMethod": "PUT",
+          "proxyIntegration": false,
           "enableCORS": false,
-          "stageMode": 0,
-          "stageName": "test"
+          "stageMode": 1,
+          "stageName": "test",
+          "stageDeploymentId": "yc4ctt"
         },
         "globallyEditable": true,
         "usage": {
@@ -94,6 +102,6 @@
     "projectVersion": "1.0.0",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517463733123
+    "lastSave": 1517466646987
   }
 }
