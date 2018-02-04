@@ -1,187 +1,86 @@
 {
   "EDITOR_STATE": {
     "allProjectFiles": {
-      "41e7f92f-5d7f-40be-952b-ec4d9fbb3696": {
-        "id": "41e7f92f-5d7f-40be-952b-ec4d9fbb3696",
+      "37611033-8444-45d0-8975-a4bbf23b059e": {
+        "id": "37611033-8444-45d0-8975-a4bbf23b059e",
         "parent": null,
-        "name": "Hiru_sample",
+        "name": "fix",
         "type": "DIRECTORY",
         "isDirectory": true,
         "children": [
-          "07642d82-e2f6-476f-94bc-443281645ef0"
+          "0a7e89b9-33ea-4419-9a7e-d0fc752da44b"
         ],
         "isRemovable": false,
-        "filePath": "Hiru_sample"
+        "filePath": "fix"
       },
-      "07642d82-e2f6-476f-94bc-443281645ef0": {
-        "id": "07642d82-e2f6-476f-94bc-443281645ef0",
-        "parent": "41e7f92f-5d7f-40be-952b-ec4d9fbb3696",
+      "0a7e89b9-33ea-4419-9a7e-d0fc752da44b": {
+        "id": "0a7e89b9-33ea-4419-9a7e-d0fc752da44b",
+        "parent": "37611033-8444-45d0-8975-a4bbf23b059e",
         "name": "lambda.js",
         "type": "LAMBDA_FILE",
         "isDirectory": false,
         "children": [],
         "isRemovable": true,
-        "filePath": "Hiru_sample/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\nexports.handler = function (event, context, callback) {\n\n\tddb.put({\n\t\tTableName: 'Hiru_Test',\n\t\tItem: { 'sample': '001' }\n\t}, function (err, data) {\n\t\tif (err) {\n\t\t\tconsole.log(err);\n\n\t\t} else {\n\t\t\tconsole.log(data);\n\t\t}\n\t});\n\n\tddb.put({\n\t\tTableName: 'sample',\n\t\tItem: { 'Name': 'Hiru' }\n\t}, function (err, data) {\n\t\tif (err) {\n\t\t\t//handle error\n\t\t} else {\n\t\t\t//your logic goes here\n\t\t}\n\t});\n\n\n\tcallback(null, data);\n}",
+        "filePath": "fix/lambda.js",
+        "code": "let AWS = require('aws-sdk');\nconst s3 = new AWS.S3();\nexports.handler = function (event, context, callback) {\n\ts3.listObjects({\n\t\t'Bucket': 'randomized_blogspot_com_images',\n\t\t'MaxKeys': 0,\n\t\t'Prefix': ''\n\t}).promise()\n\t\t.then(data => {\n\t\t\tconsole.log(data);           // successful response\n\t\t\t/*\n\t\t\tdata = {\n\t\t\t Contents: [\n\t\t\t\t{\n\t\t\t\t   ETag: \"\\\\\"70ee1738b6b21e2c8a43f3a5ab0eee71\\\\\"\",\n\t\t\t\t   Key: \"example1.jpg\",\n\t\t\t\t   LastModified: <Date Representation>,\n\t\t\t\t   Owner: {\n\t\t\t\t\t  DisplayName: \"myname\",\n\t\t\t\t\t  ID: \"12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc\"\n\t\t\t\t   },\n\t\t\t\t   Size: 11,\n\t\t\t\t   StorageClass: \"STANDARD\"\n\t\t\t\t},\n\t\t\t\t{...}\n\t\t\t*/\n\t\t})\n\t\t.catch(err => {\n\t\t\tconsole.log(err, err.stack); // an error occurred\n\t\t});\n\tcallback(null, 'Successfully executed');\n}",
         "resources": [
-          "cwesample",
-          "ddbHiruTest",
-          "ddbsample"
+          "cwetimer",
+          "s3randomizedblogspotcomimages"
         ],
         "triggers": [
           {
-            "resourceName": "cwesample",
-            "config": {
-              "mode": 0,
-              "name": "sample",
-              "description": "",
-              "eventPattern": {
-                "source": [
-                  "aws.ec2"
-                ],
-                "detail-type": [
-                  "EC2 Instance State-change Notification"
-                ]
-              }
-            }
+            "resourceName": "cwetimer",
+            "config": {}
           }
         ],
-        "version": 1
+        "version": 4
       }
     },
-    "rootNode": "41e7f92f-5d7f-40be-952b-ec4d9fbb3696",
+    "rootNode": "37611033-8444-45d0-8975-a4bbf23b059e",
     "openFiles": [
-      "07642d82-e2f6-476f-94bc-443281645ef0"
+      "0a7e89b9-33ea-4419-9a7e-d0fc752da44b"
     ],
-    "currentFileId": "07642d82-e2f6-476f-94bc-443281645ef0",
+    "currentFileId": "0a7e89b9-33ea-4419-9a7e-d0fc752da44b",
     "resources": {
-      "cwesample": {
-        "name": "cwesample",
+      "cwetimer": {
+        "name": "cwetimer",
         "type": "CLOUD_WATCH",
         "config": {
           "mode": 0,
-          "name": "sample",
+          "name": "timer",
           "description": "",
-          "eventPattern": {
-            "source": [
-              "aws.ec2"
-            ],
-            "detail-type": [
-              "EC2 Instance State-change Notification"
-            ]
-          }
+          "scheduleExpression": "rate(1 minute)"
         },
         "globallyEditable": true,
         "usage": {
-          "07642d82-e2f6-476f-94bc-443281645ef0": {
+          "0a7e89b9-33ea-4419-9a7e-d0fc752da44b": {
             "operations": {},
             "occurrence": 1,
             "triggers": [
-              {
-                "mode": 0,
-                "name": "sample",
-                "description": "",
-                "eventPattern": {
-                  "source": [
-                    "aws.ec2"
-                  ],
-                  "detail-type": [
-                    "EC2 Instance State-change Notification"
-                  ]
-                }
-              }
+              {}
             ]
           }
         }
       },
-      "ddbHiruTest": {
-        "name": "ddbHiruTest",
-        "type": "DynamoDB",
+      "s3randomizedblogspotcomimages": {
+        "name": "s3randomizedblogspotcomimages",
+        "type": "S3",
         "config": {
-          "mode": 0,
-          "operation": "put",
-          "table": {
-            "arn": "",
-            "name": "Hiru_Test",
-            "partitionKey": "001",
-            "partitionKeyType": "S",
-            "hasSortKey": false,
-            "sortKey": "",
-            "sortKeyType": "S",
-            "mode": 0
-          },
-          "isGlobalEditMode": false,
-          "parameters": {
-            "Key": {},
-            "Item": {
-              "sample": "001"
-            },
-            "ExpressionAttributeValues": {}
-          },
-          "validator": {
-            "validatableFields": {},
-            "validity": true
-          },
-          "valid": true
-        },
-        "globallyEditable": true,
-        "usage": {
-          "07642d82-e2f6-476f-94bc-443281645ef0": {
-            "operations": {
-              "put": [
-                {
-                  "TableName": "Hiru_Test",
-                  "Item": {
-                    "sample": "001"
-                  }
-                }
-              ]
-            },
-            "occurrence": 1,
-            "triggers": []
+          "mode": 1,
+          "bucket": {
+            "region": "ap-southeast-1",
+            "name": "randomized_blogspot_com_images"
           }
-        }
-      },
-      "ddbsample": {
-        "name": "ddbsample",
-        "type": "DynamoDB",
-        "config": {
-          "mode": 0,
-          "operation": "put",
-          "table": {
-            "arn": "",
-            "name": "sample",
-            "partitionKey": "ID",
-            "partitionKeyType": "S",
-            "hasSortKey": false,
-            "sortKey": "",
-            "sortKeyType": "S",
-            "mode": 0
-          },
-          "isGlobalEditMode": false,
-          "parameters": {
-            "Key": {},
-            "Item": {
-              "Name": "Hiru"
-            },
-            "ExpressionAttributeValues": {}
-          },
-          "validator": {
-            "validatableFields": {},
-            "validity": true
-          },
-          "valid": true
         },
-        "globallyEditable": true,
+        "globallyEditable": false,
         "usage": {
-          "07642d82-e2f6-476f-94bc-443281645ef0": {
+          "0a7e89b9-33ea-4419-9a7e-d0fc752da44b": {
             "operations": {
-              "put": [
+              "listObjects": [
                 {
-                  "TableName": "sample",
-                  "Item": {
-                    "Name": "Hiru"
-                  }
+                  "Bucket": "randomized_blogspot_com_images",
+                  "MaxKeys": 0,
+                  "Prefix": ""
                 }
               ]
             },
@@ -201,21 +100,22 @@
         "slappforge-sdk": {
           "name": "@slappforge/slappforge-sdk",
           "version": "0.0.3",
-          "notRemovable": true
+          "notRemovable": true,
+          "types": "\n                    declare class RDSQueryParams {\n    instanceIdentifier: string;\n    query: string;\n    inserts: Array<any>\n}\n\ndeclare namespace SL.AWS {\n    class RDS {\n        query(params: RDSQueryParams, callback: Function, connection: any): void;\n\n        beginTransaction(params: any, callback: Function): void;\n    }\n\n    class SQS {\n        receiveAndDeleteMessages(params: any, filteringCallBack: Function, deleteCallBack: Function, errorCallBack: Function): void;\n    }\n}\n"
         }
       }
     },
-    "lambdaId": "07642d82-e2f6-476f-94bc-443281645ef0",
-    "changeExistingProject": true,
+    "lambdaId": "0a7e89b9-33ea-4419-9a7e-d0fc752da44b",
+    "changeExistingProject": false,
     "additionalFiles": []
   },
   "PROJECT_META": {
-    "projectName": "Hiru_sample",
+    "projectName": "fix",
     "projectDescription": "",
-    "projectVersion": "1.0.0",
+    "projectVersion": "1.0",
+    "projectRegion": "ap-southeast-1",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517487193046,
-    "projectRegion": "us-east-1"
+    "lastSave": 1517711014808
   }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "Hiru_sample",
-  "version": "1.0.0",
+  "name": "fix",
+  "version": "1.0",
   "dependencies": {
     "aws-sdk": "2.176.0",
     "@slappforge/slappforge-sdk": "0.0.3"
