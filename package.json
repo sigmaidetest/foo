@@ -1,6 +1,6 @@
 {
   "name": "fix",
-  "version": "1.0",
+  "version": "2.0.1",
   "dependencies": {
     "aws-sdk": "2.176.0",
     "@slappforge/slappforge-sdk": "0.0.3"
