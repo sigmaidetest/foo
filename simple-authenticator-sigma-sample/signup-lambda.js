@@ -9,10 +9,11 @@ exports.handler = function (event, context, callback) {
 	// You can pass the existing connection to this function.
 	// A new connection will be created if it's not present as the third param 
 	// You must always end the DB connection after it's used
+	let inserts = [event.email, event.password, event.lastName, event.firstName, event.address];
 	rds.query({
 		instanceIdentifier: 'authDatabase',
 		query: 'INSERT INTO users (Email, Password, LastName, FirstName, Address) VALUES (?, ?, ?, ?, ?);',
-		inserts: [event.email, event.password, event.lastName, event.firstName, event.address]
+		inserts: inserts
 	}, function (error, results, connection) {
 		if (error) {
 			response = error;
