@@ -22,18 +22,20 @@
         "children": [],
         "isRemovable": true,
         "filePath": "fix/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst s3 = new AWS.S3();\nexports.handler = function (event, context, callback) {\n\ts3.listObjects({\n\t\t'Bucket': 'randomized_blogspot_com_images',\n\t\t'MaxKeys': 0,\n\t\t'Prefix': ''\n\t}).promise()\n\t\t.then(data => {\n\t\t\tconsole.log(data);           // successful response\n\t\t\t/*\n\t\t\tdata = {\n\t\t\t Contents: [\n\t\t\t\t{\n\t\t\t\t   ETag: \"\\\\\"70ee1738b6b21e2c8a43f3a5ab0eee71\\\\\"\",\n\t\t\t\t   Key: \"example1.jpg\",\n\t\t\t\t   LastModified: <Date Representation>,\n\t\t\t\t   Owner: {\n\t\t\t\t\t  DisplayName: \"myname\",\n\t\t\t\t\t  ID: \"12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc\"\n\t\t\t\t   },\n\t\t\t\t   Size: 11,\n\t\t\t\t   StorageClass: \"STANDARD\"\n\t\t\t\t},\n\t\t\t\t{...}\n\t\t\t*/\n\t\t})\n\t\t.catch(err => {\n\t\t\tconsole.log(err, err.stack); // an error occurred\n\t\t});\n\tcallback(null, 'Successfully executed');\n}",
+        "code": "let AWS = require('aws-sdk');\n\nexports.handler = function (event, context, callback) {\n\tcallback(null, '{}');\n}",
         "resources": [
+          "s3randomizedblogspotcomimages",
           "cwetimer",
-          "s3randomizedblogspotcomimages"
+          "cwetimer",
+          "apigapSoutheast1apipathget"
         ],
         "triggers": [
           {
-            "resourceName": "cwetimer",
+            "resourceName": "apigapSoutheast1apipathget",
             "config": {}
           }
         ],
-        "version": 1
+        "version": 7
       }
     },
     "rootNode": "37611033-8444-45d0-8975-a4bbf23b059e",
@@ -42,26 +44,6 @@
     ],
     "currentFileId": "0a7e89b9-33ea-4419-9a7e-d0fc752da44b",
     "resources": {
-      "cwetimer": {
-        "name": "cwetimer",
-        "type": "CLOUD_WATCH",
-        "config": {
-          "mode": 0,
-          "name": "timer",
-          "description": "",
-          "scheduleExpression": "rate(1 minute)"
-        },
-        "globallyEditable": true,
-        "usage": {
-          "0a7e89b9-33ea-4419-9a7e-d0fc752da44b": {
-            "operations": {},
-            "occurrence": 1,
-            "triggers": [
-              {}
-            ]
-          }
-        }
-      },
       "s3randomizedblogspotcomimages": {
         "name": "s3randomizedblogspotcomimages",
         "type": "S3",
@@ -73,19 +55,85 @@
           }
         },
         "globallyEditable": false,
+        "usage": {}
+      },
+      "cwenak": {
+        "name": "cwenak",
+        "type": "CLOUD_WATCH",
+        "config": {
+          "mode": 0,
+          "name": "nak",
+          "description": "",
+          "eventPattern": {
+            "source": [
+              "aws.autoscaling"
+            ],
+            "detail-type": [
+              "AWS API Call via CloudTrail"
+            ],
+            "detail": {
+              "eventName": [
+                "CompleteLifecycleAction",
+                "CreateAutoScalingGroup"
+              ],
+              "eventSource": [
+                "autoscaling.amazonaws.com"
+              ]
+            }
+          }
+        },
+        "globallyEditable": true,
+        "usage": {}
+      },
+      "cwetimer": {
+        "name": "cwetimer",
+        "type": "CLOUD_WATCH",
+        "config": {
+          "mode": 0,
+          "name": "timer",
+          "description": "",
+          "eventPattern": {
+            "source": [
+              "aws.rds"
+            ],
+            "detail-type": [
+              "AWS API Call via CloudTrail"
+            ],
+            "detail": {
+              "eventSource": [
+                "rds.amazonaws.com"
+              ]
+            }
+          }
+        },
+        "globallyEditable": true,
+        "usage": {}
+      },
+      "apigapSoutheast1apipathget": {
+        "name": "apigapSoutheast1apipathget",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "ap-southeast-1",
+          "apiMode": 0,
+          "apiName": "api",
+          "endpointType": "EDGE",
+          "resourceMode": 0,
+          "resourceName": "path",
+          "resourcePath": "/path",
+          "restMethod": "GET",
+          "proxyIntegration": false,
+          "enableCORS": true,
+          "stageMode": 0,
+          "stageName": "test"
+        },
+        "globallyEditable": true,
         "usage": {
           "0a7e89b9-33ea-4419-9a7e-d0fc752da44b": {
-            "operations": {
-              "listObjects": [
-                {
-                  "Bucket": "randomized_blogspot_com_images",
-                  "MaxKeys": 0,
-                  "Prefix": ""
-                }
-              ]
-            },
+            "operations": {},
             "occurrence": 1,
-            "triggers": []
+            "triggers": [
+              {}
+            ]
           }
         }
       }
@@ -116,6 +164,6 @@
     "projectRegion": "ap-southeast-1",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517711800975
+    "lastSave": 1517813140772
   }
 }
