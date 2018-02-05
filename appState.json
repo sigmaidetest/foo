@@ -25,10 +25,6 @@
         "isRemovable": true,
         "filePath": "simple-authenticator-sigma-sample/signup-lambda.js",
         "code": "let AWS = require('aws-sdk');\nlet connectionManager = require('./ConnectionManager');\nlet SL = require('@slappforge/slappforge-sdk');\nconst rds = new SL.AWS.RDS(connectionManager);\nexports.handler = function (event, context, callback) {\n\n    let response;\n\t// Replace the query with the actual query\n\t// You can pass the existing connection to this function.\n\t// A new connection will be created if it's not present as the third param \n\t// You must always end the DB connection after it's used\n\trds.query({\n\t\tinstanceIdentifier: 'authDatabase',\n\t\tquery: 'INSERT INTO users (Email, Password, LastName, FirstName, Address) VALUES (?, ?, ?, ?, ?);',\n\t\tinserts: [event.email, event.password, event.lastName, event.firstName, event.address]\n\t}, function (error, results, connection) {\n\t\tif (error) {\n\t\t\tresponse = error;\n\t\t\tthrow error;\n\t\t} else {\n\t\t\tresponse = \"Successfully added a new user with email\";\n\t\t\tconsole.log(response);\n\t\t\tconsole.log(results);\n\t\t}\n\t\tconnection.end();\n\t\tcallback(null, response);\n\t});\n}",
-        "resources": [
-          "rds-authDatabase",
-          "apigusEast1authApisigninpost"
-        ],
         "triggers": [
           {
             "resourceName": "apigusEast1authApisignuppost",
@@ -47,7 +43,6 @@
         "isRemovable": true,
         "filePath": "simple-authenticator-sigma-sample/ConnectionManager.js",
         "code": "module.exports=function(){\n\n    this.dbConnections = [];\n    \n    this.dbConnections[\"authDatabase\"] = {\n        host: process.env.EndPoint_rdsMobileBackend,\n        port: 3306,\n        user: \"rnavagamuwa\",\n        password: \"12345678\",\n        database: \"authDatabase\",\n    };\n    };",
-        "resources": [],
         "triggers": [],
         "version": 1
       },
@@ -61,9 +56,6 @@
         "isRemovable": true,
         "filePath": "simple-authenticator-sigma-sample/signin-lambda.js",
         "code": "let AWS = require('aws-sdk');\nlet connectionManager = require('./ConnectionManager');\nlet SL = require('@slappforge/slappforge-sdk');\nconst rds = new SL.AWS.RDS(connectionManager);\nexports.handler = function (event, context, callback) {\n\n    let successfullyLoggedIn = false;\n\t// Replace the query with the actual query\n\t// You can pass the existing connection to this function.\n\t// A new connection will be created if it's not present as the third param \n\t// You must always end the DB connection after it's used\n\trds.query({\n\t\tinstanceIdentifier: 'authDatabase',\n\t\tquery: 'SELECT * FROM users WHERE Email = ? AND Password = ?',\n\t\tinserts: [event.email, event.password]\n\t}, function (error, results, connection) {\n\t\tif (error) {\n\t\t\tthrow error;\n\t\t} else {\n\t\t\tsuccessfullyLoggedIn = results.length > 0;\n\t\t}\n\n\t\tconnection.end();\n\t\tcallback(null, successfullyLoggedIn);\n\t});\n\n}",
-        "resources": [
-          "rds-mobilebackend"
-        ],
         "triggers": [
           {
             "resourceName": "apigusEast1authApisigninpost",
@@ -197,6 +189,6 @@
     "projectRegion": "us-east-1",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517825602099
+    "lastSave": 1517825997526
   }
 }
