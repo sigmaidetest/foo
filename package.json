@@ -1,6 +1,6 @@
 {
-  "name": "simple-authenticator-sigma-sample",
-  "version": "1.0.0",
+  "name": "foo",
+  "version": "1.0.1",
   "dependencies": {
     "aws-sdk": "2.176.0",
     "@slappforge/slappforge-sdk": "0.0.3"

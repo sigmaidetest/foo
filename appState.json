@@ -1,164 +1,181 @@
 {
   "EDITOR_STATE": {
     "allProjectFiles": {
-      "6b62ae10-8931-47a3-baa6-958f52e066f8": {
-        "id": "6b62ae10-8931-47a3-baa6-958f52e066f8",
+      "ae490322-6601-4aa4-b855-919b92603238": {
+        "id": "ae490322-6601-4aa4-b855-919b92603238",
         "parent": null,
-        "name": "simple-authenticator-sigma-sample",
+        "name": "foo",
         "type": "DIRECTORY",
         "isDirectory": true,
         "children": [
-          "b25cfaa4-4d44-4464-83f9-5b8ff3d06549",
-          "4a2466e7-d4da-40a4-b57c-d0cb6aa6b0b4",
-          "ef6a3550-9c0a-44a1-a422-dbb21d93168c"
+          "3d06a450-b685-47e8-8af4-c25e79eb392f"
         ],
         "isRemovable": false,
-        "filePath": "simple-authenticator-sigma-sample"
+        "filePath": "foo"
       },
-      "b25cfaa4-4d44-4464-83f9-5b8ff3d06549": {
-        "id": "b25cfaa4-4d44-4464-83f9-5b8ff3d06549",
-        "parent": "6b62ae10-8931-47a3-baa6-958f52e066f8",
-        "name": "signup-lambda.js",
+      "3d06a450-b685-47e8-8af4-c25e79eb392f": {
+        "id": "3d06a450-b685-47e8-8af4-c25e79eb392f",
+        "parent": "ae490322-6601-4aa4-b855-919b92603238",
+        "name": "lambda.js",
         "type": "LAMBDA_FILE",
         "isDirectory": false,
         "children": [],
         "isRemovable": true,
-        "filePath": "simple-authenticator-sigma-sample/signup-lambda.js",
-        "code": "let AWS = require('aws-sdk');\nlet connectionManager = require('./ConnectionManager');\nlet SL = require('@slappforge/slappforge-sdk');\nconst rds = new SL.AWS.RDS(connectionManager);\nexports.handler = function (event, context, callback) {\n\n    let response;\n\t// Replace the query with the actual query\n\t// You can pass the existing connection to this function.\n\t// A new connection will be created if it's not present as the third param \n\t// You must always end the DB connection after it's used\n\tlet inserts = [event.email, event.password, event.lastName, event.firstName, event.address];\n\trds.query({\n\t\tinstanceIdentifier: 'authDatabase',\n\t\tquery: 'INSERT INTO users (Email, Password, LastName, FirstName, Address) VALUES (?, ?, ?, ?, ?);',\n\t\tinserts: inserts\n\t}, function (error, results, connection) {\n\t\tif (error) {\n\t\t\tresponse = error;\n\t\t\tthrow error;\n\t\t} else {\n\t\t\tresponse = \"Successfully added a new user with email\";\n\t\t\tconsole.log(response);\n\t\t\tconsole.log(results);\n\t\t}\n\t\tconnection.end();\n\t\tcallback(null, response);\n\t});\n}",
+        "filePath": "foo/lambda.js",
+        "code": "let AWS = require('aws-sdk');\nlet SL = require('@slappforge/slappforge-sdk');\n\nconst sqs = new SL.AWS.SQS(AWS);\nconst sns = new AWS.SNS();\nconst kinesis = new AWS.Kinesis();\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\tddb.get({\n\t\tTableName: 'test',\n\t\tKey: { 'a': 'ba' }\n\t}, function (err, data) {\n\t\tif (err) {\n\t\t\t//handle error\n\t\t} else {\n\t\t\t//your logic goes here\n\t\t}\n\t});\n\tkinesis.describeStream({\n\t\tStreamName: 'kin'\n\t}).promise()\n\t\t.then(data => {\n\t\t\t// your logic goes here\n\t\t})\n\t\t.catch(err => {\n\t\t\t// error handling goes here\n\t\t});\n\tcallback(null, 'Successfully executed');\n\tsns.publish({\n\t\tMessage: 'tx',\n\t\tSubject: 'msg',\n\t\tMessageAttributes: {},\n\t\tMessageStructure: 'String',\n\t\tTopicArn: 'arn:aws:sns:eu-central-1:359675929438:sns'\n\t}).promise()\n\t\t.then(data => {\n\t\t\t// your code goes here\n\t\t})\n\t\t.catch(err => {\n\t\t\t// error handling goes here\n\t\t});\n\tsqs.receiveMessage({\n\t\tQueueUrl: 'https://sqs.eu-central-1.amazonaws.com/359675929438/sqs',\n\t\tAttributeNames: ['All'],\n\t\tMaxNumberOfMessages: '1',\n\t\tVisibilityTimeout: '30',\n\t\tWaitTimeSeconds: '0'\n\t}, function (receivedMessages) {\n\t\treceivedMessages.forEach(message => {\n\t\t\t// your logic to access each message through out the loop. Each message is available under variable message \n\t\t\t// within this block\n\t\t})\n\t}, function (error) {\n\t\t// implement error handling logic here\n\t});\n}",
         "triggers": [
           {
-            "resourceName": "apigusEast1authApisignuppost",
+            "resourceName": "s3apigKineProxy",
+            "config": {
+              "type": "s3:ObjectCreated:*",
+              "keyPrefix": "",
+              "keySuffix": ""
+            }
+          },
+          {
+            "resourceName": "cwesched",
+            "config": {}
+          },
+          {
+            "resourceName": "apigeuCentral1apipathget",
             "config": {}
           }
         ],
-        "version": 1
-      },
-      "4a2466e7-d4da-40a4-b57c-d0cb6aa6b0b4": {
-        "id": "4a2466e7-d4da-40a4-b57c-d0cb6aa6b0b4",
-        "parent": "6b62ae10-8931-47a3-baa6-958f52e066f8",
-        "name": "ConnectionManager.js",
-        "type": "JS_FILE",
-        "isDirectory": false,
-        "children": [],
-        "isRemovable": true,
-        "filePath": "simple-authenticator-sigma-sample/ConnectionManager.js",
-        "code": "module.exports=function(){\n\n    this.dbConnections = [];\n    \n    this.dbConnections[\"authDatabase\"] = {\n        host: process.env.EndPoint_rdsMobileBackend,\n        port: 3306,\n        user: \"rnavagamuwa\",\n        password: \"12345678\",\n        database: \"authDatabase\",\n    };\n    };",
-        "triggers": [],
-        "version": 1
-      },
-      "ef6a3550-9c0a-44a1-a422-dbb21d93168c": {
-        "id": "ef6a3550-9c0a-44a1-a422-dbb21d93168c",
-        "parent": "6b62ae10-8931-47a3-baa6-958f52e066f8",
-        "name": "signin-lambda.js",
-        "type": "LAMBDA_FILE",
-        "isDirectory": false,
-        "children": [],
-        "isRemovable": true,
-        "filePath": "simple-authenticator-sigma-sample/signin-lambda.js",
-        "code": "let AWS = require('aws-sdk');\nlet connectionManager = require('./ConnectionManager');\nlet SL = require('@slappforge/slappforge-sdk');\nconst rds = new SL.AWS.RDS(connectionManager);\nexports.handler = function (event, context, callback) {\n\n    let successfullyLoggedIn = false;\n\t// Replace the query with the actual query\n\t// You can pass the existing connection to this function.\n\t// A new connection will be created if it's not present as the third param \n\t// You must always end the DB connection after it's used\n\trds.query({\n\t\tinstanceIdentifier: 'authDatabase',\n\t\tquery: 'SELECT * FROM users WHERE Email = ? AND Password = ?',\n\t\tinserts: [event.email, event.password]\n\t}, function (error, results, connection) {\n\t\tif (error) {\n\t\t\tthrow error;\n\t\t} else {\n\t\t\tsuccessfullyLoggedIn = results.length > 0;\n\t\t}\n\n\t\tconnection.end();\n\t\tcallback(null, successfullyLoggedIn);\n\t});\n\n}",
-        "triggers": [
-          {
-            "resourceName": "apigusEast1authApisigninpost",
-            "config": {
-              "selectedRegion": "us-east-1",
-              "apiMode": 0,
-              "apiName": "mobile-signin-sample-api",
-              "endpointType": "EDGE",
-              "resourceMode": 0,
-              "resourceName": "signin",
-              "resourcePath": "/signin",
-              "restMethod": "POST",
-              "proxyIntegration": false,
-              "stageMode": 0,
-              "stageName": "prod"
-            }
-          }
-        ],
-        "version": 1
+        "version": 12
       }
     },
-    "rootNode": "6b62ae10-8931-47a3-baa6-958f52e066f8",
+    "rootNode": "ae490322-6601-4aa4-b855-919b92603238",
     "openFiles": [
-      "b25cfaa4-4d44-4464-83f9-5b8ff3d06549",
-      "ef6a3550-9c0a-44a1-a422-dbb21d93168c"
+      "3d06a450-b685-47e8-8af4-c25e79eb392f"
     ],
-    "currentFileId": "b25cfaa4-4d44-4464-83f9-5b8ff3d06549",
+    "currentFileId": "3d06a450-b685-47e8-8af4-c25e79eb392f",
     "resources": {
-      "rds-authDatabase": {
-        "name": "rds-authDatabase",
-        "type": "RDS",
+      "s3apigKineProxy": {
+        "name": "s3apigKineProxy",
+        "type": "S3",
         "config": {
-          "operation": 0,
-          "editMode": true,
-          "rdsInstance": {
-            "rdsEngineType": "mysql",
-            "rdsEdition": "",
-            "rdsInstanceSpec": {
-              "dbInstanceClass": "db.t2.micro",
-              "dbLicenseModel": "general-public-license",
-              "dbEngineVersion": "5.7.19"
-            },
-            "rdsSetting": {
-              "instanceIdentifier": "authDatabase",
-              "masterUsername": "rnavagamuwa",
-              "masterPassword": "12345678"
-            },
-            "rdsDBOptions": {
-              "dbName": "authDatabase",
-              "dbPort": "3306"
-            },
-            "rdsInstanceArn": "",
-            "Host": "process.env.EndPoint_authDatabase",
-            "doesExist": false,
-            "initializationQuery": "CREATE TABLE users\n(\nUserId int NOT NULL AUTO_INCREMENT,\nEmail varchar(255) NOT NULL UNIQUE,\nPassword varchar(255) NOT NULL,\nLastName varchar(255),\nFirstName varchar(255),\nAddress varchar(255),\nPRIMARY KEY (UserId)\n);"
-          },
-          "rdsInstanceResources": [],
+          "mode": 1,
+          "bucket": {
+            "region": "eu-central-1",
+            "name": "apig-kine-proxy"
+          }
+        },
+        "globallyEditable": false
+      },
+      "cwesched": {
+        "name": "cwesched",
+        "type": "CLOUD_WATCH",
+        "config": {
           "mode": 0,
-          "projectRegion": "us-east-1",
-          "additionalFiles": [],
-          "params": {
-            "query": "INSERT INTO users (Email, Password, LastName, FirstName, Address) VALUES (?, ?, ?, ?, ?);",
-            "inserts": "\"randikanavagamuwa@gmail.com\",\"password\",\"Navagamuwa\",\"Randika\",\"Colombo\""
+          "name": "sched",
+          "description": "",
+          "scheduleExpression": "rate(5 minutes)"
+        },
+        "globallyEditable": true
+      },
+      "apigeuCentral1apipathget": {
+        "name": "apigeuCentral1apipathget",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "eu-central-1",
+          "apiMode": 0,
+          "apiName": "api",
+          "endpointType": "EDGE",
+          "resourceMode": 0,
+          "resourceName": "path",
+          "resourcePath": "/path",
+          "restMethod": "GET",
+          "proxyIntegration": false,
+          "enableCORS": true,
+          "stageMode": 0,
+          "stageName": "prod"
+        },
+        "globallyEditable": true
+      },
+      "ddbtest": {
+        "name": "ddbtest",
+        "type": "DynamoDB",
+        "config": {
+          "mode": 0,
+          "operation": "get",
+          "table": {
+            "arn": "",
+            "name": "test",
+            "partitionKey": "a",
+            "partitionKeyType": "S",
+            "hasSortKey": false,
+            "sortKey": "",
+            "sortKeyType": "S",
+            "mode": 0
           },
           "isGlobalEditMode": false,
-          "enableInject": true,
-          "isNewFromGlobal": false
+          "parameters": {
+            "Key": {
+              "a": "ba"
+            },
+            "Item": {},
+            "ExpressionAttributeValues": {}
+          },
+          "validator": {
+            "validatableFields": {},
+            "validity": true
+          },
+          "valid": true
+        },
+        "globallyEditable": false
+      },
+      "kinesiskin": {
+        "name": "kinesiskin",
+        "type": "Kinesis",
+        "config": {
+          "mode": 0,
+          "StreamName": "kin",
+          "shards": 1,
+          "region": "eu-central-1",
+          "operation": "describe-stream"
         },
         "globallyEditable": true
       },
-      "apigusEast1authApisigninpost": {
-        "name": "apigusEast1authApisigninpost",
-        "type": "API_GATEWAY",
+      "snseuCentral1sns": {
+        "name": "snseuCentral1sns",
+        "type": "SNS",
         "config": {
-          "selectedRegion": "us-east-1",
-          "apiMode": 0,
-          "apiName": "auth-api",
-          "endpointType": "EDGE",
-          "resourceMode": 0,
-          "resourceName": "signin",
-          "resourcePath": "/signin",
-          "restMethod": "POST",
-          "proxyIntegration": false,
-          "stageMode": 0,
-          "stageName": "prod"
+          "topicMode": 0,
+          "topicName": "sns",
+          "topicArn": "arn:aws:sns:eu-central-1:359675929438:sns",
+          "topicRegion": "eu-central-1",
+          "snsType": 0,
+          "topicDisplayName": "sns",
+          "subscriptions": []
         },
         "globallyEditable": true
       },
-      "apigusEast1authApisignuppost": {
-        "name": "apigusEast1authApisignuppost",
-        "type": "API_GATEWAY",
+      "sqseuCentral1sqs": {
+        "name": "sqseuCentral1sqs",
+        "type": "SQS",
         "config": {
-          "selectedRegion": "us-east-1",
-          "apiMode": 0,
-          "apiName": "auth-api",
-          "endpointType": "EDGE",
-          "resourceMode": 0,
-          "resourceName": "signup",
-          "resourcePath": "/signup",
-          "restMethod": "POST",
-          "proxyIntegration": false,
-          "stageMode": 0,
-          "stageName": "prod"
+          "mode": 0,
+          "existing": false,
+          "name": "sqs",
+          "url": "https://sqs.eu-central-1.amazonaws.com/359675929438/sqs",
+          "selectedRegion": "eu-central-1",
+          "deliveryDelay": 0,
+          "deliveryDelayUnit": "seconds",
+          "useRedrivePolicy": false,
+          "useSSE": false,
+          "kmsCustomerMasterKey": "default",
+          "accountId": "359675929438",
+          "dataKeyReusePeriod": 5,
+          "queueType": "standardQueue",
+          "defaultVisibilityTimeout": 30,
+          "defaultVisibilityTimeoutUnit": "seconds",
+          "messageRetentionPeriod": 4,
+          "messageRetentionPeriodUnit": "days",
+          "maximumMessageSize": 256,
+          "receiveMessageWaitTime": 0,
+          "deadLetterQueueName": "",
+          "contentBasedDeduplication": false,
+          "operation": 0
         },
         "globallyEditable": true
       }
@@ -173,21 +190,22 @@
         "slappforge-sdk": {
           "name": "@slappforge/slappforge-sdk",
           "version": "0.0.3",
-          "notRemovable": true
+          "notRemovable": true,
+          "types": "\n                    declare class RDSQueryParams {\n    instanceIdentifier: string;\n    query: string;\n    inserts: Array<any>\n}\n\ndeclare namespace SL.AWS {\n    class RDS {\n        query(params: RDSQueryParams, callback: Function, connection: any): void;\n\n        beginTransaction(params: any, callback: Function): void;\n    }\n\n    class SQS {\n        receiveAndDeleteMessages(params: any, filteringCallBack: Function, deleteCallBack: Function, errorCallBack: Function): void;\n    }\n}\n"
         },
-        "SL": "0.0.3"
+        "SL": "1.0.0"
       }
     },
-    "additionalFiles": [],
-    "lambdaId": "b25cfaa4-4d44-4464-83f9-5b8ff3d06549"
+    "lambdaId": "3d06a450-b685-47e8-8af4-c25e79eb392f",
+    "additionalFiles": []
   },
   "PROJECT_META": {
-    "projectName": "simple-authenticator-sigma-sample",
+    "projectName": "foo",
     "projectDescription": "",
-    "projectVersion": "1.0.0",
-    "projectRegion": "us-east-1",
+    "projectVersion": "1.0.1",
+    "projectRegion": "eu-central-1",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517826785597
+    "lastSave": 1517910595702
   }
 }
