@@ -33,11 +33,11 @@
             }
           },
           {
-            "resourceName": "cwesched",
+            "resourceName": "apigeuCentral1apipathget",
             "config": {}
           },
           {
-            "resourceName": "apigeuCentral1apipathget",
+            "resourceName": "cwesched",
             "config": {}
           }
         ],
@@ -69,7 +69,7 @@
           "mode": 0,
           "name": "sched",
           "description": "",
-          "scheduleExpression": "rate(5 minutes)"
+          "scheduleExpression": "rate(4 minutes)"
         },
         "globallyEditable": true
       },
@@ -203,9 +203,9 @@
     "projectName": "foo",
     "projectDescription": "",
     "projectVersion": "1.0.1",
-    "projectRegion": "eu-central-1",
+    "projectRegion": "us-east-1",
     "repoName": "foo",
     "repoUrl": "https://github.com/sigmaidetest/foo",
-    "lastSave": 1517964610728
+    "lastSave": 1517984109057
   }
 }
